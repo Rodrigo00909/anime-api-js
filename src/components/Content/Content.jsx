@@ -35,6 +35,10 @@ const useStyles = makeStyles((theme) => ({
         width: '150px',
         height: '150px'
     },
+    card: {
+        display: 'grid',
+        gridTemplateColumns: 'repeat(4, 1fr)'
+    },
 }));
 
 
@@ -51,7 +55,7 @@ function Content({ topAnimes, favoriteAnimes, HandleSearch, search, SetSearch, a
                         <form onSubmit={HandleSearch}>
                             <input type="search" placeholder="Busca tu anime" required value={search} onChange={e => SetSearch(e.target.value)} />
                         </form>
-                        <div>
+                        <div className={classes.card}>
                             {anime.map(anime => (
                                 <Card anime={anime} key={anime.mal_id} />
                             ))}
