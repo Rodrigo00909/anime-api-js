@@ -10,7 +10,7 @@ const url = 'https://api.jikan.moe/v3/';
 
 function App() {
 
-  const [animes, setAnimes] = useState([]);
+  const [anime, setAnime] = useState([]);
 
   const [topAnimes, setTopAnimes] = useState([]);
 
@@ -42,11 +42,23 @@ function App() {
 
   }, []);
 
+  // Search
+  const HandleSearch = (e) => {
+    e.preventDefault();
+
+    FetchAnime(search);
+  }
+
+  const FetchAnime = async (query) => {
+    const temp = await fetch(`${url}search/anime?q=${query}&order_by=title&sort=asc&limit=10`).then(res => res.json());
+
+    setAnime(temp.results);
+  }
 
   return (
     <div className="App">
       <Header />
-      <Content topAnimes={topAnimes} favoriteAnimes={favoriteAnimes}/>
+      <Content topAnimes={topAnimes} favoriteAnimes={favoriteAnimes} HandleSearch={HandleSearch} search={search} SetSearch={setSearch} anime={anime} />
     </div>
   );
 }
