@@ -1,9 +1,12 @@
 import {useState, useEffect} from 'react';
-import Header from './components/Header/Header';
 
-import {Api} from './api/Api';
+import Header from './components/Header/Header';
+import Content from './components/Content/Content';
+
 
 import './App.css';
+
+/* const url = 'https://api.jikan.moe/v3/top/type/page/subtype'; */
 
 function App() {
 
@@ -13,13 +16,23 @@ function App() {
 
   const [search, setSearch] = useState([]);
 
+  const GetTopAnimes = async () => {
+    const temp = await fetch(`https://api.jikan.moe/v3/top/anime/1/bypopularity`).then(res => res.json());
+    
+    setTopAnimes(temp.top.slice(0, 5));
+  }
+
+  useEffect(() => {
+    GetTopAnimes();
+
+    console.log(topAnimes);
+  }, [])
+
   return (
-    <>
+    <div className="App">
       <Header />
-      <div>
-        
-      </div>
-    </>
+      <Content topAnimes={topAnimes}/>
+    </div>
   );
 }
 
