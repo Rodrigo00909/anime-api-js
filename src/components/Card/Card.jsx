@@ -13,16 +13,21 @@ const useStyles = makeStyles((theme) => ({
     },
     card: {
         width: '100% !important',
-        height: '100% !important'
+        height: '100% !important',
+        marginBottom: '40px',
+        borderLeft: '2px #000',
+        boxShadow: '6px 6px 20px rgba(122, 122, 122, 0.212)',
     },
     img: {
         width: '60%',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
+        borderLeft: '7px solid #7b76806e',
     },
     textBg: {
         margin: '0 auto',
         width: '60%',
+        borderLeft: '7px solid #7b76806e',
     }
 }));
 

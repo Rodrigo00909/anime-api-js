@@ -30,8 +30,7 @@ const useStyles = makeStyles((theme) => ({
         width: '300px',
         fontSize: '16px',
         textAlign: 'center',
-        marginBottom: '30px',
-        marginTop: '10px',
+        marginBottom: '45px',
         transition: '0.4s ease',
         "&:focus": {
             borderBottom: '1px solid #4d57e4',
@@ -62,6 +61,7 @@ const useStyles = makeStyles((theme) => ({
         flexWrap: 'wrap',
         justifyContent: 'space-around',
         textAlign: 'center',
+        marginBottom: '20px',
     },
     sidebar: {
         textAlign: 'center',
@@ -114,7 +114,7 @@ function Content({ topAnimes, favoriteAnimes, HandleSearch, search, SetSearch, a
 
 
                 <div className={classes.searchDiv}>
-                    <h2>Use these for search our anime!</h2>
+                    <h2 className={classes.mainTitle}>Use these for search our anime!</h2>
                     <form onSubmit={HandleSearch}>
                         <input className={classes.searchInput} type="search" placeholder="Search..." required value={search} onChange={e => SetSearch(e.target.value)} />
                     </form>
