@@ -2,7 +2,7 @@ import React from 'react';
 
 import Card from '../Card/Card';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, fade } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
@@ -13,6 +13,30 @@ const useStyles = makeStyles((theme) => ({
         flexWrap: 'wrap',
         justifyContent: 'space-around',
         overflow: 'hidden',
+    },
+    searchDiv: {
+        textAlign: 'center',
+        margin: '20px 0 20px 0',
+        margin: '0 auto',
+        marginTop: '30px',
+    },
+    searchInput: {
+        backgroundColor: 'transparent',
+        border: 'none',
+        borderBottom: '1px solid #9e9e9e',
+        borderTop: '1px solid #9e9e9e',
+        borderRadius: '0',
+        outline: 'none',
+        height: '3rem',
+        width: '300px',
+        fontSize: '16px',
+        textAlign: 'center',
+        marginBottom: '30px',
+        marginTop: '10px',
+        "&:focus": {
+            borderBottom: '1px solid #4d57e4',
+            borderTop: '1px solid #4d57e4',
+        }
     },
     gridList: {
         width: 'auto',
@@ -42,6 +66,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
+
 function Content({ topAnimes, favoriteAnimes, HandleSearch, search, SetSearch, anime }) {
 
     const classes = useStyles();
@@ -50,15 +75,17 @@ function Content({ topAnimes, favoriteAnimes, HandleSearch, search, SetSearch, a
         <>
             <Container fixed>
                 <Typography component="div" style={{ backgroundColor: '#cfe8fc', height: '100vh' }}>
-                    <h2>Busca tu anime</h2>
                     <Grid item xs={12}>
-                        <form onSubmit={HandleSearch}>
-                            <input type="search" placeholder="Busca tu anime" required value={search} onChange={e => SetSearch(e.target.value)} />
-                        </form>
-                        <div className={classes.card}>
-                            {anime.map(anime => (
-                                <Card anime={anime} key={anime.mal_id} />
-                            ))}
+                        <div className={classes.searchDiv}>
+                            <h2>Use these for search our anime!</h2>
+                            <form onSubmit={HandleSearch}>
+                                <input className={classes.searchInput} type="search" placeholder="Search..." required value={search} onChange={e => SetSearch(e.target.value)} />
+                            </form>
+                            <div className={classes.card}>
+                                {anime.map(anime => (
+                                    <Card anime={anime} key={anime.mal_id} />
+                                ))}
+                            </div>
                         </div>
                     </Grid>
                     <Grid container spacing={3}>
