@@ -24,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: 'transparent',
         border: 'none',
         borderBottom: '1px solid #9e9e9e',
-        borderTop: '1px solid #9e9e9e',
         borderRadius: '0',
         outline: 'none',
         height: '3rem',
@@ -33,10 +32,18 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
         marginBottom: '30px',
         marginTop: '10px',
+        transition: '0.4s ease',
         "&:focus": {
             borderBottom: '1px solid #4d57e4',
-            borderTop: '1px solid #4d57e4',
+            width: '400px',
         }
+    },
+    searchLine: {
+        borderBottom: '1px solid #dfdfdf',
+        margin: '0 auto',
+        marginTop: '30px',
+        marginBottom: '30px',
+        width: '70%'
     },
     gridList: {
         width: 'auto',
@@ -44,25 +51,55 @@ const useStyles = makeStyles((theme) => ({
     },
     mainTitle: {
         textAlign: 'center',
+        marginBottom: '45px',
+        textShadow: '#9a9898 6px 6px 8px',
+        textTransform: 'uppercase',
+        color: '#3c3a3a',
     },
+
     mainContent: {
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'space-around',
+        textAlign: 'center',
     },
     sidebar: {
         textAlign: 'center',
         display: 'flex',
         alignItems: 'center'
     },
-    img: {
-        width: '150px',
-        height: '150px'
+    imgE: {
+        width: '95%',
+        height: '70%',
+        borderRadius: '2rem',
+        borderBottomRightRadius: 'inherit',
+        borderBottomLeftRadius: 'inherit'
+    },
+    imgD: {
+
+    },
+    textEDiv: {
+        padding: '10px 0 20px 0'
+    },
+    textE: {
+        textShadow: '0 0 #523232',
+        textDecoration: 'none',
+        color: '#4c4a4a',
+        fontSize: '18px',
     },
     card: {
         display: 'grid',
         gridTemplateColumns: 'repeat(4, 1fr)'
     },
+    cardBg: {
+        with: '100%',
+        borderRadius: '2rem',
+        zIndex: '2',
+        backdropFilter: 'blur(2rem)',
+        boxShadow: '6px 6px 20px rgba(122, 122, 122, 0.212)',
+        background: 'linear-gradient(to right top, #f9f9f973, #c1c1c191)',
+        margin: '0 15px 15px 15px',
+    }
 }));
 
 
@@ -73,52 +110,53 @@ function Content({ topAnimes, favoriteAnimes, HandleSearch, search, SetSearch, a
 
     return (
         <>
-            <Container fixed>
-                <Typography component="div" style={{ backgroundColor: '#cfe8fc', height: '100vh' }}>
-                    <Grid item xs={12}>
-                        <div className={classes.searchDiv}>
-                            <h2>Use these for search our anime!</h2>
-                            <form onSubmit={HandleSearch}>
-                                <input className={classes.searchInput} type="search" placeholder="Search..." required value={search} onChange={e => SetSearch(e.target.value)} />
-                            </form>
-                            <div className={classes.card}>
-                                {anime.map(anime => (
-                                    <Card anime={anime} key={anime.mal_id} />
-                                ))}
-                            </div>
-                        </div>
-                    </Grid>
-                    <Grid container spacing={3}>
-                        <Grid item xs={12} sm={8}>
-                            <h3 className={classes.mainTitle}>Animes Esperados</h3>
-                            <Grid container>
-                                {favoriteAnimes.map(anime => (
-                                    <Grid item xs={6} sm={6} className={classes.mainContent}>
+            <Container maxWidth="xl">
+
+
+                <div className={classes.searchDiv}>
+                    <h2>Use these for search our anime!</h2>
+                    <form onSubmit={HandleSearch}>
+                        <input className={classes.searchInput} type="search" placeholder="Search..." required value={search} onChange={e => SetSearch(e.target.value)} />
+                    </form>
+                    <div className={classes.card}>
+                        {anime.map(anime => (
+                            <Card anime={anime} key={anime.mal_id} />
+                        ))}
+                    </div>
+                </div>
+                <div className={classes.searchLine}></div>
+                <Grid container spacing={3}>
+                    <Grid item xs={12} md={8} sm={12}>
+                        <h3 className={classes.mainTitle}>Animes Esperados</h3>
+                        <Grid container>
+                            {favoriteAnimes.map(anime => (
+                                <Grid item xs={12} sm={4} className={classes.mainContent}>
+                                    <div className={classes.cardBg}>
                                         <Grid item xs={12} sm={12}>
-                                            <div><img className={classes.img} src={anime.image_url} alt="" /></div>
+                                            <div><img className={classes.imgE} src={anime.image_url} alt="" /></div>
                                         </Grid>
-                                        <Grid item xs={12} sm={12}>
-                                            <a href={anime.url} key={anime.mal_id} target="_blank" rel="noreferrer">{anime.title}</a>
+                                        <Grid item xs={12} sm={12} className={classes.textEDiv} >
+                                            <a className={classes.textE} href={anime.url} key={anime.mal_id} target="_blank" rel="noreferrer">{anime.title}</a>
                                         </Grid>
-                                    </Grid>
-                                ))}
-                            </Grid>
-                        </Grid>
-                        <Grid item xs={12} sm={4}>
-                            <h3>Animes Populares de siempre</h3>
-                            {topAnimes.map(anime => (
-                                <div className={classes.sidebar} >
-                                    <Grid item>
-                                        <div><img className={classes.img} src={anime.image_url} alt="" /></div>
-                                    </Grid>
-                                    <Grid item>
-                                        <a href={anime.url} key={anime.mal_id} target="_blank" rel="noreferrer">{anime.title}</a>
-                                    </Grid>
-                                </div>
+                                    </div>
+                                </Grid>
                             ))}
                         </Grid>
                     </Grid>
-                </Typography>
+                    <Grid item xs={12} md={4} sm={12}>
+                        <h3 className={classes.mainTitle} >Animes Populares de siempre</h3>
+                        {topAnimes.map(anime => (
+                            <div className={classes.sidebar} >
+                                <Grid item>
+                                    <div><img className={classes.imgD} src={anime.image_url} alt="" /></div>
+                                </Grid>
+                                <Grid item>
+                                    <a href={anime.url} key={anime.mal_id} target="_blank" rel="noreferrer">{anime.title}</a>
+                                </Grid>
+                            </div>
+                        ))}
+                    </Grid>
+                </Grid>
             </Container>
         </>
     );

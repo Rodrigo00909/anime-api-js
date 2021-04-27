@@ -12,12 +12,17 @@ const useStyles = makeStyles((theme) => ({
         overflow: 'hidden',
     },
     card: {
-        width: '90% !important',
-        height: '80% !important'
+        width: '100% !important',
+        height: '100% !important'
     },
     img: {
+        width: '60%',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
+    },
+    textBg: {
+        margin: '0 auto',
+        width: '60%',
     }
 }));
 
@@ -29,8 +34,8 @@ const Card = ({ anime }) => {
         <>
             <GridList className={classes.grid}>
                 <GridListTile className={classes.card}>
-                    <img src={anime.image_url} alt="Anime image" />
-                    <GridListTileBar title={anime.title} />
+                    <img className={classes.img} src={anime.image_url} alt="Anime image" />
+                    <GridListTileBar className={classes.textBg} title={anime.title} />
                 </GridListTile>
             </GridList>
         </>
