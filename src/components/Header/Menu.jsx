@@ -4,6 +4,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
+import Logo from '../../assets/img/AnimeApi.png';
+
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -14,6 +16,11 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('sm')]: {
             display: 'block',
         },
+        textAlign: 'center',
+    },
+    logo: {
+        height: '130px',
+        fontSize: '200px',
     },
 }));
 
@@ -25,7 +32,7 @@ export default function Menu() {
             <AppBar position="static">
                 <Toolbar>
                     <Typography className={classes.title} variant="h6" noWrap>
-                        Anime App
+                        <img className={classes.logo} src={Logo} alt="" />
                     </Typography>
                 </Toolbar>
             </AppBar>

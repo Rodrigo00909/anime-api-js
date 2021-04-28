@@ -4,7 +4,6 @@ import Card from '../Card/Card';
 
 import { makeStyles, fade } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles((theme) => ({
@@ -62,21 +61,28 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'space-around',
         textAlign: 'center',
         marginBottom: '20px',
+        transition: '1s ease',
+        '&:hover': {
+            transform: 'scale(1.1)',
+        }
     },
     sidebar: {
+        display: 'grid',
+        width: '50%',
+        gridTemplateColumns: 'max-content',
+        marginBottom: '20px',
         textAlign: 'center',
-        display: 'flex',
-        alignItems: 'center'
     },
     imgE: {
         width: '95%',
         height: '70%',
         borderRadius: '2rem',
         borderBottomRightRadius: 'inherit',
-        borderBottomLeftRadius: 'inherit'
+        borderBottomLeftRadius: 'inherit',
     },
     imgD: {
-
+        width: '50%',
+        paddingLeft: '50px',
     },
     textEDiv: {
         padding: '10px 0 20px 0'
@@ -86,6 +92,14 @@ const useStyles = makeStyles((theme) => ({
         textDecoration: 'none',
         color: '#4c4a4a',
         fontSize: '18px',
+    },
+    textD: {
+        textDecoration: 'none',
+        color: '#4c4a4a',
+        '&:hover': {
+            color: '#3487d4',
+            transform: 'scale(1.1)',
+        }
     },
     card: {
         display: 'grid',
@@ -110,54 +124,56 @@ function Content({ topAnimes, favoriteAnimes, HandleSearch, search, SetSearch, a
 
     return (
         <>
-            <Container maxWidth="xl">
-
-
-                <div className={classes.searchDiv}>
-                    <h2 className={classes.mainTitle}>Use these for search our anime!</h2>
-                    <form onSubmit={HandleSearch}>
-                        <input className={classes.searchInput} type="search" placeholder="Search..." required value={search} onChange={e => SetSearch(e.target.value)} />
-                    </form>
-                    <div className={classes.card}>
-                        {anime.map(anime => (
-                            <Card anime={anime} key={anime.mal_id} />
-                        ))}
-                    </div>
+            {/*       <Container maxWidth="xl"></Container> */}
+            <div className={classes.searchDiv}>
+                <h2 className={classes.mainTitle}>Use these for search our anime!</h2>
+                <form onSubmit={HandleSearch}>
+                    <input className={classes.searchInput} type="search" placeholder="Search..." required value={search} onChange={e => SetSearch(e.target.value)} />
+                </form>
+                <div className="cardsSearch">
+                    {anime.map(anime => (
+                        <Card anime={anime} key={anime.mal_id} />
+                    ))}
                 </div>
-                <div className={classes.searchLine}></div>
-                <Grid container spacing={3}>
-                    <Grid item xs={12} md={8} sm={12}>
-                        <h3 className={classes.mainTitle}>Animes Esperados</h3>
-                        <Grid container>
-                            {favoriteAnimes.map(anime => (
-                                <Grid item xs={12} sm={4} className={classes.mainContent}>
-                                    <div className={classes.cardBg}>
+            </div>
+            <div className={classes.searchLine}></div>
+            <Grid container spacing={12}>
+                <Grid item xs={12} md={8} sm={12}>
+                    <h3 className={classes.mainTitle}>Most Anticipated Anime</h3>
+                    <Grid container>
+                        {favoriteAnimes.map(anime => (
+                            <Grid item xs={12} sm={4} md={4} className={classes.mainContent}>
+                                <div className={classes.cardBg}>
+                                    <a href={anime.url} target="_blank" >
                                         <Grid item xs={12} sm={12}>
                                             <div><img className={classes.imgE} src={anime.image_url} alt="" /></div>
                                         </Grid>
-                                        <Grid item xs={12} sm={12} className={classes.textEDiv} >
-                                            <a className={classes.textE} href={anime.url} key={anime.mal_id} target="_blank" rel="noreferrer">{anime.title}</a>
-                                        </Grid>
-                                    </div>
-                                </Grid>
-                            ))}
-                        </Grid>
+                                    </a>
+                                    <Grid item xs={12} sm={12} className={classes.textEDiv} >
+                                        <a className={classes.textE} href={anime.url} key={anime.mal_id} target="_blank" rel="noreferrer">{anime.title}</a>
+                                    </Grid>
+                                </div>
+                            </Grid>
+                        ))}
                     </Grid>
-                    <Grid item xs={12} md={4} sm={12}>
-                        <h3 className={classes.mainTitle} >Animes Populares de siempre</h3>
+                </Grid>
+                <Grid item xs={4} md={2} sm={4}>
+                    <div className="titleD"><h3 className={classes.mainTitle}>Popular Anime</h3></div>
+                    <div className="cardD">
                         {topAnimes.map(anime => (
                             <div className={classes.sidebar} >
                                 <Grid item>
                                     <div><img className={classes.imgD} src={anime.image_url} alt="" /></div>
                                 </Grid>
                                 <Grid item>
-                                    <a href={anime.url} key={anime.mal_id} target="_blank" rel="noreferrer">{anime.title}</a>
+                                    <a className={classes.textD} href={anime.url} key={anime.mal_id} target="_blank" rel="noreferrer">{anime.title}</a>
                                 </Grid>
                             </div>
                         ))}
-                    </Grid>
+                    </div>
                 </Grid>
-            </Container>
+            </Grid>
+
         </>
     );
 }
