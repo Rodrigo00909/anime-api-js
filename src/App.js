@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react';
 
 import Header from './components/Header/Header';
 import Content from './components/Content/Content';
+import Footer from './components/Footer/Footer';
 
 
 import './App.css';
@@ -59,6 +60,7 @@ function App() {
     <div className="App">
       <Header />
       <Content topAnimes={topAnimes} favoriteAnimes={favoriteAnimes} HandleSearch={HandleSearch} search={search} SetSearch={setSearch} anime={anime} />
+      <Footer />
     </div>
   );
 }

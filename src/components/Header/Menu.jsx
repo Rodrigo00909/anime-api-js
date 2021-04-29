@@ -32,7 +32,7 @@ export default function Menu() {
             <AppBar position="static">
                 <Toolbar>
                     <Typography className={classes.title} variant="h6" noWrap>
-                        <img className={classes.logo} src={Logo} alt="" />
+                        <img className={classes.logo} src={Logo} alt="Anime Api" />
                     </Typography>
                 </Toolbar>
             </AppBar>
