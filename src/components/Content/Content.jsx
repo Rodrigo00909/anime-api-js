@@ -137,7 +137,7 @@ function Content({ topAnimes, favoriteAnimes, HandleSearch, search, SetSearch, a
                 </div>
             </div>
             <div className={classes.searchLine}></div>
-            <Grid container spacing={12}>
+            <Grid container justify="space-evenly" alignItems="stretch" spacing={3}>
                 <Grid item xs={12} md={8} sm={12}>
                     <h3 className={classes.mainTitle}>Most Anticipated Anime</h3>
                     <Grid container>
@@ -157,7 +157,7 @@ function Content({ topAnimes, favoriteAnimes, HandleSearch, search, SetSearch, a
                         ))}
                     </Grid>
                 </Grid>
-                <Grid item xs={4} md={2} sm={4}>
+                <Grid item md={2} sm={4}>
                     <div className="titleD"><h3 className={classes.mainTitle}>Popular Anime</h3></div>
                     <div className="cardD">
                         {topAnimes.map(anime => (
